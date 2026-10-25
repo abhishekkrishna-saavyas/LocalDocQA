@@ -25,21 +25,9 @@ Created automatically on first run (do not create these by hand):
   vectorstore/    Chroma vector database (one collection per user)
 
 
-==============================================================================
- QUICK START  (run from the project folder, in this order)
-==============================================================================
-
- 1. Install Python 3.10 or newer, and the Ollama app (see section 1).
- 2. Install the Python libraries   -> command in section 3.
- 3. Download the two Ollama models -> command in section 4.
- 4. Start the app:
-
-        streamlit run app.py
 
 
-==============================================================================
- 1. PREREQUISITES (not installed with pip)
-==============================================================================
+#PREREQUISITES (not installed with pip)
 
  Python 3.10 or newer
      Required: auth.py uses the "int | None" type syntax, which does not
@@ -51,45 +39,8 @@ Created automatically on first run (do not create these by hand):
      system tray after install; if not, start it with:   ollama serve
 
 
-==============================================================================
- 2. PYTHON LIBRARIES REQUIRED
-==============================================================================
+#ONE-COMMAND INSTALL OF ALL PYTHON LIBRARIES  (PowerShell)
 
- Package               Used by            Purpose
- --------------------  -----------------  ----------------------------------
- streamlit (>=1.39)    app.py             Web UI. Version 1.39+ is REQUIRED:
-                                          app.py uses st.container(key=...),
-                                          which older versions do not have.
- bcrypt                auth.py            Password hashing for login/signup
- langchain-community   ingest.py, query   PyPDFLoader, Docx2txtLoader,
-                                          TextLoader, and the Chroma wrapper
- langchain-core        ingest.py, query   Document, ChatPromptTemplate,
-                                          StrOutputParser
- langchain-text-       ingest.py          RecursiveCharacterTextSplitter
-   splitters                              (chunking)
- langchain-ollama      ingest.py, query   OllamaEmbeddings, ChatOllama
- chromadb              (runtime)          Vector database. Not imported by
-                                          your code directly, but the Chroma
-                                          wrapper fails without it.
- pypdf                 ingest.py          PDF text loading and PDF image
-                                          extraction (PdfReader)
- docx2txt              (runtime)          .docx text extraction. Not imported
-                                          directly; Docx2txtLoader needs it.
- python-pptx           ingest.py          .pptx text and image extraction
-
- Notes:
-   - The "langchain" meta-package is NOT needed. No file imports it.
-   - Dependencies of the above (numpy, pydantic, ollama client, Pillow,
-     onnxruntime, etc.) are installed automatically by pip.
-
- Python standard library modules used (nothing to install):
-   os, sys, shutil, gc, json, uuid, secrets, sqlite3, datetime, pathlib,
-   contextlib
-
-
-==============================================================================
- 3. ONE-COMMAND INSTALL OF ALL PYTHON LIBRARIES  (PowerShell)
-==============================================================================
 
  Paste as a single line:
 
@@ -111,9 +62,8 @@ python -m pip install --upgrade pip; python -m pip install "streamlit>=1.39" bcr
      Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 
-==============================================================================
- 4. INSTALL THE OLLAMA MODELS
-==============================================================================
+#INSTALL THE OLLAMA MODELS
+
 
  The LLM used for answers (the model set in query.py as LLM_MODEL):
 
@@ -138,28 +88,17 @@ python -m pip install --upgrade pip; python -m pip install "streamlit>=1.39" bcr
  e.g.   ollama pull qwen2.5
 
 
-==============================================================================
- 5. RUNNING THE APP
-==============================================================================
+RUNNING THE APP
+
 
  From the project folder (with the virtual environment active, if you made
  one, and Ollama running):
 
      streamlit run app.py
 
- It opens in your browser, normally at http://localhost:8501
 
- Typical first-time flow:
-   Sign up -> log in -> switch to the "Ingestion" tab -> upload files ->
-   "Run Ingestion" -> switch back to "Chat" -> "New chat" -> ask questions.
+TROUBLESHOOTING
 
- Supported upload types: PDF, DOCX, TXT, PPTX.
- Legacy .ppt files are not supported - convert them to .pptx first.
-
-
-==============================================================================
- 6. TROUBLESHOOTING
-==============================================================================
 
  "No module named ..." on startup
      A library is missing - re-run the install command in section 3, and
@@ -180,24 +119,5 @@ python -m pip install --upgrade pip; python -m pip install "streamlit>=1.39" bcr
      lost; uploaded files under data/ are not affected.
 
 
-==============================================================================
- 7. KNOWN-GOOD VERSIONS (optional)
-==============================================================================
-
- LangChain packages occasionally rename or move imports between releases.
- This exact set was installed fresh in a clean virtual environment on
- Python 3.12, and the project's modules imported and the app's login screen
- rendered without errors:
-
-     streamlit 1.66.1          bcrypt 5.0.0
-     langchain-community 0.4.2   langchain-core 1.7.0
-     langchain-ollama 1.1.0      langchain-text-splitters 1.1.3
-     chromadb 1.5.9              pypdf 6.21.2
-     docx2txt 0.9                python-pptx 1.0.2
-
- If a future library update ever breaks the project, reinstall this exact
- set with (single line):
-
-python -m pip install streamlit==1.66.1 bcrypt==5.0.0 langchain-community==0.4.2 langchain-core==1.7.0 langchain-ollama==1.1.0 langchain-text-splitters==1.1.3 chromadb==1.5.9 pypdf==6.21.2 docx2txt==0.9 python-pptx==1.0.2
 
 ==============================================================================
