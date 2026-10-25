@@ -1,9 +1,8 @@
 # LocalDocQA
 
-==============================================================================
  LocalDocQA - Local RAG Document Q&A
  README: requirements and setup (Windows / PowerShell)
-==============================================================================
+
 
 WHAT THIS PROJECT IS
 --------------------
